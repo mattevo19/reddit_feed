@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 
 function App() {
+  const [articles, setArticles] = useState([]);
+  const [subreddit, setSubreddit] = useState('OnePiece');
+
+  useEffect(() => {
+    fetch("https://www.reddit.com/r/OnePiece.json").then(res =>{
+      res.json().then(data => {
+        if (data != null) {
+          console.log(data)
+        }
+      })
+    })
+  }, [subreddit])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <input type="text" className="input" defaultValue="OnePiece" />
       </header>
+      <div className="articles">
+
+      </div>
     </div>
   );
 }
